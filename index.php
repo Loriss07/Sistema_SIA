@@ -1,5 +1,7 @@
 <?php 
     session_start();
+    $_SESSION['regione'] = " ";
+    $_SESSION['parchi'] = array();
 ?>
 <!DOCTYPE html>
 <html>
@@ -14,11 +16,13 @@
     <body>
        
         <div>
-            <form method="GET" id="reg" action="<?php echo $_SERVER['PHP_SELF']; ?>" >
+            <div>
                 <input type="text" id="nomeReg" name="regione" placeholder="Seleziona una Regione">
-                <input type="submit" value="Seleziona">
+                <button id="ok">Invia</button>
+                <button id="del">Cancella</button>
+            </div>
                 
-            </form>
+
             <form method="GET" action="<?php echo $_SERVER['PHP_SELF']; ?>">
                 <select name="parchi" id="pSl"></select>
             </form>
