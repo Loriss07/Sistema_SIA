@@ -29,8 +29,7 @@
                 <button id="ok_p">Invia</button>
            </div>
                 
-            </form>
-            <form method="GET">
+            <form>
                 <select name="specie" id="sp"></select>
             </form>
         </div>

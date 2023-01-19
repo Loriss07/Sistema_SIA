@@ -10,7 +10,8 @@ var SpeciesOptions = Array();
 
 document.getElementById("ok").addEventListener("click", function(){ submit(id_reg,id_sel) });
 document.getElementById("del").addEventListener("click", function(){ clear() });
-document.getElementById("ok_p").addEventListener("click",function(){ SelectSpecies()})
+document.getElementById("ok_p").addEventListener("click",function(){ SelectSpecies()});
+document.getElementById("sp").addEventListener("select",function(){ valueSel()});
 
 function test() { alert("SIA"); }
 
@@ -74,10 +75,15 @@ function DeleteOptions(options,numElements,idParent)
     options.length = 0;
 }
 
-function SelectSpecies()
+function valueSel()
 {
     var e = document.getElementById(id_specie).value;
     valueParco = e;
+}
+
+function SelectSpecies()
+{
+    
     const speciesRequest = new XMLHttpRequest();
     speciesRequest.onreadystatechange = function()
     {
@@ -87,11 +93,16 @@ function SelectSpecies()
             if (!res.length == 0)
             {
                 Species = JSON.parse(res);
-                AddOptions(Species,Species.length,id_specie,Species);
+                for (let index = 0; index < numElements; index++) {
+                    const sel = document.createElement("option");
+                    sel.setAttribute("value",Species[index].Name);
+                    sel.innerHTML = array[index].Name;
+                    document.getElementById(id).appendChild(sel);
+                    SpeciesOptions[index] = sel;
+                }
             }
             
         }
-        
     }
     speciesRequest.open("GET",'specie.php?parco=' + valueSpecie);
     speciesRequest.send();
