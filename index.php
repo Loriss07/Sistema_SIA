@@ -24,9 +24,11 @@
             </div>
                 
 
-            <form method="GET">
+           <div>
                 <select name="parchi" id="pSl"></select>
                 <button id="ok_p">Invia</button>
+           </div>
+                
             </form>
             <form method="GET">
                 <select name="specie" id="sp"></select>

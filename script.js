@@ -76,9 +76,8 @@ function DeleteOptions(options,numElements,idParent)
 
 function SelectSpecies()
 {
-    var e = document.getElementById(id_specie);
-    var text = e.options[e.selectedIndex].text;
-    valueParco = text;
+    var e = document.getElementById(id_specie).value;
+    valueParco = e;
     const speciesRequest = new XMLHttpRequest();
     speciesRequest.onreadystatechange = function()
     {

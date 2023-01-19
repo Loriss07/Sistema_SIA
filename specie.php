@@ -1,7 +1,7 @@
 <?php
     session_start();
 
-    $response;
+    $response = "";
     if (isset($_REQUEST['parco']))
     {
         $ip = '127.0.0.1';
@@ -12,7 +12,7 @@
         if ($connection->connect_error) { die($response = "Errore! Impossibile ragiungere il database"); }
 
         $parco = $_GET['parco'];
-        $query = 'SELECT Specie FROM `animali` WHERE ID_Parco="' . $parco . '"';
+        $query = 'SELECT Specie FROM animali WHERE ID_Parco="' . $parco . '"';
         $queryRes = $connection->query($query);
         if ($queryRes->num_rows > 0)
         {
