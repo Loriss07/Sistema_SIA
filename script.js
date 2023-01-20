@@ -1,5 +1,5 @@
 var valueReg = "";
-var valueSpecie = "";
+var valueParco = "";
 var id_reg = "nomeReg";
 var id_specie = "sp";
 var id_sel = "pSl";
@@ -11,7 +11,7 @@ var SpeciesOptions = Array();
 document.getElementById("ok").addEventListener("click", function(){ submit(id_reg,id_sel) });
 document.getElementById("del").addEventListener("click", function(){ clear() });
 document.getElementById("ok_p").addEventListener("click",function(){ SelectSpecies()});
-document.getElementById("sp").addEventListener("select",function(){ valueSel()});
+document.getElementById("sp").addEventListener("change",function(){ valueSel()});
 
 function test() { alert("SIA"); }
 
@@ -77,13 +77,13 @@ function DeleteOptions(options,numElements,idParent)
 
 function valueSel()
 {
-    var e = document.getElementById(id_specie).value;
+    var e = document.getElementById(id_sel).value;
     valueParco = e;
 }
 
 function SelectSpecies()
 {
-    
+    valueSel();
     const speciesRequest = new XMLHttpRequest();
     speciesRequest.onreadystatechange = function()
     {
@@ -93,17 +93,11 @@ function SelectSpecies()
             if (!res.length == 0)
             {
                 Species = JSON.parse(res);
-                for (let index = 0; index < numElements; index++) {
-                    const sel = document.createElement("option");
-                    sel.setAttribute("value",Species[index].Name);
-                    sel.innerHTML = array[index].Name;
-                    document.getElementById(id).appendChild(sel);
-                    SpeciesOptions[index] = sel;
-                }
+                AddOptions(Species,Species.length,id_specie,SpeciesOptions);
             }
             
         }
     }
-    speciesRequest.open("GET",'specie.php?parco=' + valueSpecie);
+    speciesRequest.open("GET",'specie.php?parco=' + valueParco);
     speciesRequest.send();
 }

@@ -2,7 +2,7 @@
     session_start();
     $_SESSION['regione'] = " ";
     $_SESSION['parchi'] = array();
-    $_SESSION['parco'] = "";
+    $_SESSION['parco'] = " ";
 
 ?>
 <!DOCTYPE html>
