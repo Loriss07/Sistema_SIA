@@ -12,7 +12,7 @@
         if ($connection->connect_error) { die($response = "Errore! Impossibile ragiungere il database"); }
 
         $parco = $_GET['parco'];
-        $query = 'SELECT Specie FROM animali WHERE ID_Parco="' . $parco . '"';
+        $query = 'SELECT  Specie FROM animali WHERE ID_Parco="' . $parco . '" GROUP BY Specie';
         $queryRes = $connection->query($query);
         if ($queryRes->num_rows > 0)
         {

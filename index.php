@@ -31,6 +31,7 @@
                 
             <form>
                 <select name="specie" id="sp"></select>
+                <button id="ok_sp">Invia</button>
             </form>
         </div>
         <script src="script.js"></script>

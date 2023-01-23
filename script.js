@@ -1,5 +1,6 @@
 var valueReg = "";
 var valueParco = "";
+var valueSpecie = "";
 var id_reg = "nomeReg";
 var id_specie = "sp";
 var id_sel = "pSl";
@@ -11,7 +12,7 @@ var SpeciesOptions = Array();
 document.getElementById("ok").addEventListener("click", function(){ submit(id_reg,id_sel) });
 document.getElementById("del").addEventListener("click", function(){ clear() });
 document.getElementById("ok_p").addEventListener("click",function(){ SelectSpecies()});
-document.getElementById("sp").addEventListener("change",function(){ valueSel()});
+document.getElementById("ok_sp").addEventListener("click",function(){ Interrogate()});
 
 function test() { alert("SIA"); }
 
@@ -93,11 +94,39 @@ function SelectSpecies()
             if (!res.length == 0)
             {
                 Species = JSON.parse(res);
-                AddOptions(Species,Species.length,id_specie,SpeciesOptions);
+                for (let index = 0; index < Species.length; index++) {
+                    const sel = document.createElement("option");
+                    sel.setAttribute("value",Species[index].Name);
+                    sel.innerHTML = Species[index].Name;
+                    document.getElementById("sp").appendChild(sel);
+                    SpeciesOptions[index] = sel;
+                }
             }
             
         }
     }
     speciesRequest.open("GET",'specie.php?parco=' + valueParco);
     speciesRequest.send();
+}
+
+function specieSel()
+{
+    var e = document.getElementById(id_specie).value;
+    valueSpecie = e;
+}
+
+function Interrogate()
+{
+    specieSel();
+    const interrogation = new XMLHttpRequest();
+    interrogation.onreadystatechange = function()
+    {
+        if (this.readyState == 4 && this.status == 200) {
+            let res = this.responseText;
+            alert(res);
+            
+        }
+    }
+    interrogation.open("GET",'interrog.php?specie=' + valueSpecie);
+    interrogation.send();
 }
